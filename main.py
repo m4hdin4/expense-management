@@ -51,14 +51,20 @@ def get_one(spend_id):
 
 @app.route('/post/<product_name>/<product_price>', methods=['POST', 'GET'])
 def post_one(product_name, product_price):
-    Item(product_name=product_name, product_price=product_price).save()
-    return "done"
+    try:
+        item = Item(product_name=product_name, product_price=product_price).save()
+        return get_one(item.id)
+    except:
+        return "couldn't be done!"
 
 
 @app.route('/put/<spend_id>/<product_name>/<product_price>', methods=['PUT', 'GET'])
 def update(spend_id, product_name, product_price):
-    Item.objects(id=spend_id).update_one(set__product_name=product_name, set__product_price=product_price)
-    return get_one(spend_id)
+    try:
+        Item.objects(id=spend_id).update_one(set__product_name=product_name, set__product_price=product_price)
+        return get_one(spend_id)
+    except:
+        return "couldn't be done"
 
 
 @app.route('/delete/<spend_id>', methods=['DELETE', 'GET'])
