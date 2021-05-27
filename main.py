@@ -4,7 +4,6 @@ from flask import Flask
 from mongoengine import *
 import json
 from bson import ObjectId
-import sys
 
 app = Flask(__name__)
 
@@ -16,12 +15,10 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-
 class Item(Document):
     product_name = StringField(required=True, max_length=40)
     product_price = IntField(required=True)
     date = DateTimeField(default=datetime.datetime.now())
-
 
 
 @app.route('/')
@@ -52,7 +49,6 @@ def get_one(spend_id):
     return JSONEncoder().encode(output)
 
 
-
 @app.route('/post/<product_name>/<product_price>', methods=['POST', 'GET'])
 def post_one(product_name, product_price):
     Item(product_name=product_name, product_price=product_price).save()
@@ -65,9 +61,14 @@ def update(spend_id, product_name, product_price):
     return get_one(spend_id)
 
 
-@app.route('/delete/<spend_id>', methods=['DELETE'])
+@app.route('/delete/<spend_id>', methods=['DELETE', 'GET'])
 def delete(spend_id):
-    return sys._getframe().f_code.co_name
+    try:
+        Item.objects(id=spend_id).delete()
+        return 'DELETED'
+
+    except:
+        return "object doesn't exist"
 
 
 if __name__ == '__main__':
