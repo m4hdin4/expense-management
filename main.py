@@ -3,10 +3,16 @@ from flask import Flask
 from flask import request
 from flask import abort
 from mongoengine import *
+import redis
 import json
 from bson import ObjectId
+from datetime import timedelta
+import uuid
+import hashlib
 
 app = Flask(__name__)
+redisClient = redis.StrictRedis(host='localhost', port=6379, db=0)
+connect('spends_db')
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -16,18 +22,46 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
+class User(Document):
+    username = StringField(primary_key=True, max_length=40)
+    password = StringField(required=True)
+
+
 class Category(Document):
-    category_name = StringField(required=True, max_length=40, unique=True)
+    category_name = StringField(primary_key=True, max_length=40)
 
 
 class Item(Document):
+    user = ReferenceField(User, required=True)
     product_name = StringField(required=True, max_length=40)
     category = ReferenceField(Category, required=True)
     product_price = IntField(required=True)
     date = DateTimeField(default=datetime.datetime.now())
 
 
-@app.route('/')
+def get_user_by_token(token):
+    pass
+
+
+@app.route('/login', methods=['UNLOCK'])
+def login():
+    if not request.json or \
+            'username' not in request.json or \
+            'password' not in request.json:
+        abort(400)
+    username = request.json['username']
+    password = request.json['password']
+    try:
+        user = User.objects(username=username, password=str(hashlib.md5(password.encode()).hexdigest()))[0]
+        token = str(uuid.uuid4())
+        redisClient.set(token, user.id)
+        redisClient.expire(token, timedelta(hours=3))
+        return token, 200
+    except:
+        return 'username or password is wrong', 403
+
+
+@app.route('/', methods=['GET'])
 @app.route('/get', methods=['GET'])
 def get_list():
     output_list = []
@@ -86,12 +120,26 @@ def insert():
     category = request.json['category']
     try:
         category_item = Category.objects(category_name=category)[0]
-        print("ok")
     except:
         category_item = Category(category_name=category).save()
     try:
         inserted = Item(product_name=product_name, product_price=product_price, category=category_item).save()
-        return get_one(inserted.id)
+        return inserted.id
+    except:
+        abort(400)
+
+
+@app.route('/post/user', methods=['POST'])
+def insert_user():
+    if not request.json or 'username' not in request.json or 'password' not in request.json:
+        abort(400)
+    username = request.json['username']
+    password = request.json['password']
+    if User.objects(username=username).first() is not None:
+        abort(403)
+    try:
+        user = User(username=username, password=str(hashlib.md5(password.encode()).hexdigest())).save()
+        return user.id
     except:
         abort(400)
 
@@ -166,6 +214,7 @@ def delete_category():
 
 
 if __name__ == '__main__':
-    connect('spends_db')
+    # Item.drop_collection()
+    # Category.drop_collection()
+    # User.drop_collection()
     app.run(debug=True)
-    disconnect()
