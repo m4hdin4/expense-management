@@ -169,8 +169,7 @@ def get_one():
             "sum": 10000
         }
     """
-    if not request.json or \
-            not request.headers or \
+    if not request.headers or \
             not request.args or \
             'token' not in request.headers or \
             'spend_id' not in request.args:
@@ -231,8 +230,7 @@ def get_category():
             "sum": 20000
         }
     """
-    if not request.json or \
-            not request.headers or \
+    if not request.headers or \
             not request.args or \
             'token' not in request.headers or \
             'category' not in request.args:
@@ -322,7 +320,7 @@ def signup():
     username = request.json['username']
     password = request.json['password']
     if User.objects(username=username).first() is not None:
-        abort(401)
+        return "user exists", 403
     try:
         User(username=username, password=str(hashlib.md5(password.encode()).hexdigest())).save()
         return username
@@ -355,8 +353,9 @@ def update():
             'product_name' not in request.json or \
             'category' not in request.json or \
             'product_price' not in request.json or \
-            'spend_id' not in request.json \
-            or 'token' not in request.headers:
+            'spend_id' not in request.json or \
+            'token' not in request.headers:
+        print("ok2")
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
@@ -378,6 +377,7 @@ def update():
                                                                       set__category=category_item)
         return spend_id
     except:
+        print("ok")
         abort(400)
 
 
@@ -490,4 +490,7 @@ def delete_category():
 
 
 if __name__ == '__main__':
+    # Item.drop_collection()
+    # Category.drop_collection()
+    # User.drop_collection()
     app.run(debug=True)
