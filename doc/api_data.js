@@ -5,6 +5,32 @@ define({ "api": [
     "title": "delete an available category",
     "name": "delete_category",
     "group": "category",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -35,6 +61,32 @@ define({ "api": [
     "title": "get category expenses",
     "name": "get_category",
     "group": "category",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -65,6 +117,39 @@ define({ "api": [
     "title": "update an available category name",
     "name": "update_category",
     "group": "category",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "new_category",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "old_category",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -95,6 +180,32 @@ define({ "api": [
     "title": "delete an available expense",
     "name": "delete",
     "group": "item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "spend_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -125,6 +236,32 @@ define({ "api": [
     "title": "get one item",
     "name": "get_one",
     "group": "item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -155,6 +292,46 @@ define({ "api": [
     "title": "insert a new expense",
     "name": "insert",
     "group": "item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "product_name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "product_price",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -185,6 +362,53 @@ define({ "api": [
     "title": "update an available item",
     "name": "update",
     "group": "item",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "product_name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "product_price",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "spend_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -215,6 +439,19 @@ define({ "api": [
     "title": "get user expenses",
     "name": "get_list",
     "group": "user",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -245,6 +482,26 @@ define({ "api": [
     "title": "log in users account",
     "name": "login",
     "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -253,7 +510,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "returns",
-            "description": "<p>a token</p>"
+            "description": "<p>a token - a unique id that is valid for each login for 3 hours</p>"
           }
         ]
       },
@@ -275,6 +532,26 @@ define({ "api": [
     "title": "insert a new user",
     "name": "signup",
     "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": ""
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
