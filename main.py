@@ -52,6 +52,17 @@ def get_user_by_token(token):
 
 @app.route('/login', methods=['UNLOCK'])
 def login():
+    """
+    @api {UNLOCK} /login log in users account
+    @apiName login
+    @apiGroup user
+
+    @apiSuccess {String} returns a token
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        9d2db59d-5d16-4773-adb1-f39e71321e4f
+    """
     if not request.json or \
             'username' not in request.json or \
             'password' not in request.json:
@@ -70,6 +81,38 @@ def login():
 
 @app.route('/user', methods=['GET'])
 def get_list():
+    """
+        @api {GET} /user get user expenses
+        @apiName get_list
+        @apiGroup user
+
+        @apiSuccess {Object} returns query objects if exists
+
+        @apiSuccessExample Success-Response:
+            HTTP/1.1 200 OK
+            {
+                "list":
+                [
+                    {
+                        "id": "60b4c7a37ba96ba33ab0d977",
+                        "username": "m4hdin4",
+                        "product_name": "test1",
+                        "category": "test_category",
+                        "product_price": 10000,
+                        "date": "2021-05-31 15:54:45.024000"
+                    },
+                    {
+                        "id": "60b4c7da7ba96ba33ab0d978",
+                        "username": "m4hdin4",
+                        "product_name": "test1",
+                        "category": "test_category",
+                        "product_price": 10000,
+                        "date": "2021-05-31 15:54:45.024000"
+                    }
+                ],
+                "sum": 20000
+            }
+        """
     if not request.json or 'token' not in request.json:
         abort(400)
     user = get_user_by_token(request.json['token'])
@@ -92,6 +135,30 @@ def get_list():
 
 @app.route('/item', methods=['GET'])
 def get_one():
+    """
+        @api {GET} /item get one item
+        @apiName get_one
+        @apiGroup item
+
+        @apiSuccess {Object} returns the query object if exists
+
+        @apiSuccessExample Success-Response:
+            HTTP/1.1 200 OK
+            {
+                "list":
+                [
+                    {
+                        "id": "60b4c7a37ba96ba33ab0d977",
+                        "username": "m4hdin4",
+                        "product_name": "test1",
+                        "category": "test_category",
+                        "product_price": 10000,
+                        "date": "2021-05-31 15:54:45.024000"
+                    }
+                ],
+                "sum": 10000
+            }
+        """
     if not request.json or \
             'token' not in request.json or \
             'id' not in request.json:
@@ -116,6 +183,38 @@ def get_one():
 
 @app.route('/category', methods=['GET'])
 def get_category():
+    """
+    @api {GET} /user get category expenses
+    @apiName get_category
+    @apiGroup category
+
+    @apiSuccess {Object} returns query objects if exists
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        {
+            "list":
+            [
+                {
+                    "id": "60b4c7a37ba96ba33ab0d977",
+                    "username": "m4hdin4",
+                    "product_name": "test1",
+                    "category": "test_category",
+                    "product_price": 10000,
+                    "date": "2021-05-31 15:54:45.024000"
+                },
+                {
+                    "id": "60b4c7da7ba96ba33ab0d978",
+                    "username": "m4hdin4",
+                    "product_name": "test1",
+                    "category": "test_category",
+                    "product_price": 10000,
+                    "date": "2021-05-31 15:54:45.024000"
+                }
+            ],
+            "sum": 20000
+        }
+    """
     if not request.json or \
             'token' not in request.json or \
             'category' not in request.json:
@@ -142,6 +241,17 @@ def get_category():
 
 @app.route('/item', methods=['POST'])
 def insert():
+    """
+    @api {POST} /item insert a new expense
+    @apiName insert
+    @apiGroup item
+
+    @apiSuccess {String} returns inserted object id
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        60b4c7da7ba96ba33ab0d978
+    """
     if not request.json or \
             'product_name' not in request.json or \
             'product_price' not in request.json or \
@@ -168,6 +278,17 @@ def insert():
 
 @app.route('/signup', methods=['POST'])
 def signup():
+    """
+    @api {POST} /signup insert a new user
+    @apiName signup
+    @apiGroup user
+
+    @apiSuccess {String} returns inserted user id(username)
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        m4hdin4
+    """
     if not request.json or 'username' not in request.json or 'password' not in request.json:
         abort(400)
     username = request.json['username']
@@ -183,6 +304,17 @@ def signup():
 
 @app.route('/item', methods=['PUT'])
 def update():
+    """
+    @api {PUT} /item update an available item
+    @apiName update
+    @apiGroup item
+
+    @apiSuccess {String} returns updated object id
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        60b4c7da7ba96ba33ab0d978
+    """
     if not request.json or 'product_name' not in request.json or \
             'category' not in request.json or \
             'product_price' not in request.json or \
@@ -214,6 +346,17 @@ def update():
 
 @app.route('/category', methods=['PUT'])
 def update_category():
+    """
+    @api {PUT} /category update an available category name
+    @apiName update_category
+    @apiGroup category
+
+    @apiSuccess {String} returns updated category name
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        updated_category
+    """
     if not request.json or 'old_category' not in request.json or \
             'new_category' not in request.json or \
             'token' not in request.json:
@@ -233,6 +376,17 @@ def update_category():
 
 @app.route('/item', methods=['DELETE'])
 def delete():
+    """
+    @api {DELETE} /item delete an available expense
+    @apiName delete
+    @apiGroup item
+
+    @apiSuccess {String} returns text "DELETED"
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        DELETED
+    """
     if not request.json or \
             'spend_id' not in request.json or \
             'token' not in request.json:
@@ -253,6 +407,17 @@ def delete():
 
 @app.route('/category', methods=['DELETE'])
 def delete_category():
+    """
+    @api {DELETE} /category delete an available category
+    @apiName delete_category
+    @apiGroup category
+
+    @apiSuccess {String} returns text "DELETED"
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 200 OK
+        DELETED
+    """
     if not request.json or \
             'category' not in request.json or \
             'token' not in request.json:
@@ -271,7 +436,4 @@ def delete_category():
 
 
 if __name__ == '__main__':
-    # Item.drop_collection()
-    # Category.drop_collection()
-    # User.drop_collection()
     app.run(debug=True)
