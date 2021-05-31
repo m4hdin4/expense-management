@@ -13,7 +13,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
@@ -69,7 +69,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
@@ -125,31 +125,27 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
     },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "new_category",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "old_category",
-            "description": ""
-          }
-        ]
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "new_category",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "old_category",
+        "description": ""
       }
-    },
+    ],
     "success": {
       "fields": {
         "Success 200": [
@@ -188,7 +184,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
@@ -244,7 +240,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
@@ -256,7 +252,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "id",
+            "field": "spend_id",
             "description": ""
           }
         ]
@@ -300,38 +296,34 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
     },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "product_name",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "product_price",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "category",
-            "description": ""
-          }
-        ]
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "product_name",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "Number",
+        "optional": false,
+        "field": "product_price",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "category",
+        "description": ""
       }
-    },
+    ],
     "success": {
       "fields": {
         "Success 200": [
@@ -370,45 +362,41 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
     },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "product_name",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "product_price",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "category",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "spend_id",
-            "description": ""
-          }
-        ]
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "product_name",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "Number",
+        "optional": false,
+        "field": "product_price",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "category",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "spend_id",
+        "description": ""
       }
-    },
+    ],
     "success": {
       "fields": {
         "Success 200": [
@@ -447,7 +435,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>a unique id that is valid for each login for 3 hours</li> </ul>"
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
           }
         ]
       }
@@ -482,26 +470,22 @@ define({ "api": [
     "title": "log in users account",
     "name": "login",
     "group": "user",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": ""
-          }
-        ]
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "username",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "password",
+        "description": ""
       }
-    },
+    ],
     "success": {
       "fields": {
         "Success 200": [
@@ -510,7 +494,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "returns",
-            "description": "<p>a token - a unique id that is valid for each login for 3 hours</p>"
+            "description": "<p>a token - a unique session id that is valid for each login for 3 hours</p>"
           }
         ]
       },
@@ -532,26 +516,22 @@ define({ "api": [
     "title": "insert a new user",
     "name": "signup",
     "group": "user",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": ""
-          }
-        ]
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "username",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "password",
+        "description": ""
       }
-    },
+    ],
     "success": {
       "fields": {
         "Success 200": [

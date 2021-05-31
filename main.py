@@ -57,10 +57,10 @@ def login():
     @apiName login
     @apiGroup user
 
-    @apiParam {String} username
-    @apiParam {String} password
+    @apiBody {String} username
+    @apiBody {String} password
 
-    @apiSuccess {String} returns a token - a unique id that is valid for each login for 3 hours
+    @apiSuccess {String} returns a token - a unique session id that is valid for each login for 3 hours
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
@@ -89,7 +89,7 @@ def get_list():
     @apiName get_list
     @apiGroup user
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
     @apiSuccess {Object} returns query objects if exists
 
@@ -118,7 +118,8 @@ def get_list():
             "sum": 20000
         }
     """
-    if 'token' not in request.headers:
+    if not request.headers or \
+            'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
@@ -145,9 +146,9 @@ def get_one():
     @apiName get_one
     @apiGroup item
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
-    @apiParam {String} id
+    @apiParam {String} spend_id
 
     @apiSuccess {Object} returns the query object if exists
 
@@ -169,11 +170,13 @@ def get_one():
         }
     """
     if not request.json or \
+            not request.headers or \
+            not request.args or \
             'token' not in request.headers or \
-            'id' not in request.json:
+            'spend_id' not in request.args:
         abort(400)
     user = get_user_by_token(request.headers['token'])
-    spend_id = request.json['id']
+    spend_id = request.args['spend_id']
     if user is None:
         return 'you should login first', 401
     try:
@@ -197,7 +200,7 @@ def get_category():
     @apiName get_category
     @apiGroup category
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
     @apiParam {String} category
 
@@ -229,13 +232,15 @@ def get_category():
         }
     """
     if not request.json or \
+            not request.headers or \
+            not request.args or \
             'token' not in request.headers or \
-            'category' not in request.json:
+            'category' not in request.args:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
-    category = request.json['category']
+    category = request.args['category']
     category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
     output_list = []
     query = Item.objects(Q(category=category_item))
@@ -259,11 +264,11 @@ def insert():
     @apiName insert
     @apiGroup item
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
-    @apiParam {String} product_name
-    @apiParam {Number} product_price
-    @apiParam {String} category
+    @apiBody {String} product_name
+    @apiBody {Number} product_price
+    @apiBody {String} category
 
     @apiSuccess {String} returns inserted object id
 
@@ -272,6 +277,7 @@ def insert():
         60b4c7da7ba96ba33ab0d978
     """
     if not request.json or \
+            not request.headers or \
             'product_name' not in request.json or \
             'product_price' not in request.json or \
             'category' not in request.json or \
@@ -302,8 +308,8 @@ def signup():
     @apiName signup
     @apiGroup user
 
-    @apiParam {String} username
-    @apiParam {String} password
+    @apiBody {String} username
+    @apiBody {String} password
 
     @apiSuccess {String} returns inserted user id(username)
 
@@ -331,12 +337,12 @@ def update():
     @apiName update
     @apiGroup item
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
-    @apiParam {String} product_name
-    @apiParam {Number} product_price
-    @apiParam {String} category
-    @apiParam {String} spend_id
+    @apiBody {String} product_name
+    @apiBody {Number} product_price
+    @apiBody {String} category
+    @apiBody {String} spend_id
 
     @apiSuccess {String} returns updated object id
 
@@ -344,7 +350,9 @@ def update():
         HTTP/1.1 200 OK
         60b4c7da7ba96ba33ab0d978
     """
-    if not request.json or 'product_name' not in request.json or \
+    if not request.json or \
+            not request.headers or \
+            'product_name' not in request.json or \
             'category' not in request.json or \
             'product_price' not in request.json or \
             'spend_id' not in request.json \
@@ -380,10 +388,10 @@ def update_category():
     @apiName update_category
     @apiGroup category
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
-    @apiParam {String} new_category
-    @apiParam {String} old_category
+    @apiBody {String} new_category
+    @apiBody {String} old_category
 
     @apiSuccess {String} returns updated category name
 
@@ -391,7 +399,9 @@ def update_category():
         HTTP/1.1 200 OK
         updated_category
     """
-    if not request.json or 'old_category' not in request.json or \
+    if not request.json or \
+            not request.headers or \
+            'old_category' not in request.json or \
             'new_category' not in request.json or \
             'token' not in request.headers:
         abort(400)
@@ -415,7 +425,7 @@ def delete():
     @apiName delete
     @apiGroup item
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
     @apiParam {String} spend_id
 
@@ -425,14 +435,15 @@ def delete():
         HTTP/1.1 200 OK
         DELETED
     """
-    if not request.json or \
-            'spend_id' not in request.json or \
+    if not request.args or \
+            not request.headers or \
+            'spend_id' not in request.args or \
             'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
-    spend_id = request.json['spend_id']
+    spend_id = request.args['spend_id']
     query = Item.objects(Q(id=spend_id) & Q(user=user))
     if query.first() is None:
         abort(404)
@@ -450,7 +461,7 @@ def delete_category():
     @apiName delete_category
     @apiGroup category
 
-    @apiHeader {String} token - a unique id that is valid for each login for 3 hours
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
     @apiParam {String} category
 
@@ -460,14 +471,15 @@ def delete_category():
         HTTP/1.1 200 OK
         DELETED
     """
-    if not request.json or \
-            'category' not in request.json or \
+    if not request.args or \
+            not request.headers or \
+            'category' not in request.args or \
             'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
-    category = request.json['category']
+    category = request.args['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
         Item.objects(category=category_item).delete()
