@@ -490,7 +490,7 @@ def delete_category():
 
 
 if __name__ == '__main__':
-    # Item.drop_collection()
-    # Category.drop_collection()
-    # User.drop_collection()
+    Item.drop_collection()
+    Category.drop_collection()
+    User.drop_collection()
     app.run(debug=True)
