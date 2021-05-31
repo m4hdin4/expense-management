@@ -200,7 +200,7 @@ def update():
     if Item.objects(Q(id=spend_id) & Q(user=user)).first() is None:
         abort(404)
     try:
-        category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
+        category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
     except:
         category_item = Category(category_name=category, user=user).save()
     try:
@@ -224,9 +224,9 @@ def update_category():
     old_category = request.json['old_category']
     new_category = request.json['new_category']
 
-    flag = Category.objects(Q(category_name=old_category) & Q(user=user)).update(category_name=new_category)
+    flag = Category.objects(Q(category_name=old_category) & Q(user=user)).update_one(set__category_name=new_category)
     if flag == 1:
-        return get_category(new_category)
+        return new_category
     else:
         abort(404)
 
