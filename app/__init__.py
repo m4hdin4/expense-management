@@ -3,7 +3,6 @@ from mongoengine import connect
 import redis
 
 
-print("app")
 app = Flask(__name__)
 redisClient = redis.StrictRedis(host='localhost', port=6379, db=0)
 connect('spends_db')

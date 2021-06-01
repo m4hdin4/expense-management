@@ -52,7 +52,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Category/delete_category.py",
     "groupTitle": "category"
   },
   {
@@ -108,7 +108,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Category/get_category.py",
     "groupTitle": "category"
   },
   {
@@ -167,7 +167,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Category/update_category.py",
     "groupTitle": "category"
   },
   {
@@ -223,7 +223,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Item/delete.py",
     "groupTitle": "item"
   },
   {
@@ -279,7 +279,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Item/get_one.py",
     "groupTitle": "item"
   },
   {
@@ -345,7 +345,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Item/insert.py",
     "groupTitle": "item"
   },
   {
@@ -418,8 +418,60 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/Item/update.py",
     "groupTitle": "item"
+  },
+  {
+    "type": "DELETE",
+    "url": "/user",
+    "title": "delete an account",
+    "name": "delete_account",
+    "group": "user",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "password",
+        "description": ""
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "returns",
+            "description": "<p>text &quot;DELETED&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\nDELETED",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/controllers/User/delete_account.py",
+    "groupTitle": "user"
   },
   {
     "type": "GET",
@@ -461,7 +513,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/User/get_list.py",
     "groupTitle": "user"
   },
   {
@@ -507,7 +559,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/User/login.py",
     "groupTitle": "user"
   },
   {
@@ -553,7 +605,66 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./main.py",
+    "filename": "app/controllers/User/signup.py",
+    "groupTitle": "user"
+  },
+  {
+    "type": "PUT",
+    "url": "/user",
+    "title": "update the user password",
+    "name": "update_password",
+    "group": "user",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "new_password",
+        "description": ""
+      },
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "old_password",
+        "description": ""
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "returns",
+            "description": "<p>username</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\nm4hdin4",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/controllers/User/update_password.py",
     "groupTitle": "user"
   }
 ] });
