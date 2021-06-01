@@ -1,8 +1,8 @@
-from main import app
-from models.Item import Item
-from models.Category import Category
+from app import app
+from app.models.Item import Item
+from app.models.Category import Category
 from mongoengine import Q
-from controllers.User.get_user_by_token import get_user_by_token
+from app.controllers.User.get_user_by_token import get_user_by_token
 from flask import request, abort
 
 

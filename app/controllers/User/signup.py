@@ -1,5 +1,5 @@
-from main import app
-from models.User import User
+from app import app
+from app.models.User import User
 import hashlib
 from flask import request, abort
 

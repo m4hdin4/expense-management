@@ -1,5 +1,5 @@
-from models.User import User
-from models.Category import Category
+from app.models.User import User
+from app.models.Category import Category
 from mongoengine import Document, ReferenceField, StringField, IntField, DateTimeField
 from datetime import datetime
 

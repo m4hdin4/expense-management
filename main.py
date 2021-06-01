@@ -1,20 +1,12 @@
-# from models.User import User
-# from models.Item import Item
-# from models.Category import Category
-
-from flask import Flask
-from mongoengine import *
-import redis
-
-
-app = Flask(__name__)
-redisClient = redis.StrictRedis(host='localhost', port=6379, db=0)
-connect('spends_db')
+from app import app
+from app.models.User import User
+from app.models.Item import Item
+from app.models.Category import Category
 
 
 if __name__ == '__main__':
 
-    # Item.drop_collection()
-    # Category.drop_collection()
-    # User.drop_collection()
+    Item.drop_collection()
+    Category.drop_collection()
+    User.drop_collection()
     app.run(debug=True)

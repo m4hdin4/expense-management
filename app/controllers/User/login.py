@@ -1,5 +1,5 @@
-from main import app, redisClient
-from models.User import User
+from app import app, redisClient
+from app.models.User import User
 import uuid
 from datetime import timedelta
 from flask import request, abort

@@ -1,5 +1,5 @@
-from main import redisClient
-from models.User import User
+from app import redisClient
+from app.models.User import User
 
 
 def get_user_by_token(token):
