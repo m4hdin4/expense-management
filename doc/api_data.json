@@ -52,7 +52,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Category/delete_category.py",
+    "filename": "app/controllers/Category/category.py",
     "groupTitle": "category"
   },
   {
@@ -108,7 +108,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Category/get_category.py",
+    "filename": "app/controllers/Category/category.py",
     "groupTitle": "category"
   },
   {
@@ -167,7 +167,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Category/update_category.py",
+    "filename": "app/controllers/Category/category.py",
     "groupTitle": "category"
   },
   {
@@ -223,7 +223,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Item/delete.py",
+    "filename": "app/controllers/Item/item.py",
     "groupTitle": "item"
   },
   {
@@ -279,7 +279,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Item/get_one.py",
+    "filename": "app/controllers/Item/item.py",
     "groupTitle": "item"
   },
   {
@@ -345,7 +345,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Item/insert.py",
+    "filename": "app/controllers/Item/item.py",
     "groupTitle": "item"
   },
   {
@@ -418,7 +418,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/Item/update.py",
+    "filename": "app/controllers/Item/item.py",
     "groupTitle": "item"
   },
   {
@@ -470,7 +470,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/User/delete_account.py",
+    "filename": "app/controllers/User/user.py",
     "groupTitle": "user"
   },
   {
@@ -513,7 +513,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/User/get_list.py",
+    "filename": "app/controllers/User/user.py",
     "groupTitle": "user"
   },
   {
@@ -664,7 +664,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/User/update_password.py",
+    "filename": "app/controllers/User/user.py",
     "groupTitle": "user"
   }
 ]
