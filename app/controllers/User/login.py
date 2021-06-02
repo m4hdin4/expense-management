@@ -9,7 +9,7 @@ import hashlib
 @app.route('/login', methods=['UNLOCK'])
 def login():
     """
-    @api {UNLOCK} /login log in users account
+    @api {UNLOCK} /login login
     @apiName login
     @apiGroup user
 

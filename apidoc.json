@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "back-end project to manage your expense",
   "title": "expense-management server",
-  "url" : "https://github.com/m4hdin4/expense-management"
+  "url" : "http://127.0.0.1:5000/"
 }

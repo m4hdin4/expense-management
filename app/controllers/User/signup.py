@@ -7,7 +7,7 @@ from flask import request, abort
 @app.route('/signup', methods=['POST'])
 def signup():
     """
-    @api {POST} /signup insert a new user
+    @api {POST} /signup signup
     @apiName signup
     @apiGroup user
 

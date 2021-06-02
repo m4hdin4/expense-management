@@ -10,7 +10,7 @@ from flask import request, abort
 @app.route('/item', methods=['GET'])
 def get_one():
     """
-    @api {GET} /item get one item
+    @api {GET} /item get item
     @apiName get_one
     @apiGroup item
 
@@ -63,7 +63,7 @@ def get_one():
 @app.route('/item', methods=['POST'])
 def insert():
     """
-    @api {POST} /item insert a new expense
+    @api {POST} /item insert item
     @apiName insert
     @apiGroup item
 
@@ -107,7 +107,7 @@ def insert():
 @app.route('/item', methods=['PUT'])
 def update():
     """
-    @api {PUT} /item update an available item
+    @api {PUT} /item update item
     @apiName update
     @apiGroup item
 
@@ -159,7 +159,7 @@ def update():
 @app.route('/item', methods=['DELETE'])
 def delete():
     """
-    @api {DELETE} /item delete an available expense
+    @api {DELETE} /item delete item
     @apiName delete
     @apiGroup item
 

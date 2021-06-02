@@ -11,7 +11,7 @@ import hashlib
 @app.route('/user', methods=['GET'])
 def get_list():
     """
-    @api {GET} /user get user expenses
+    @api {GET} /user get user list
     @apiName get_list
     @apiGroup user
 
@@ -64,10 +64,11 @@ def get_list():
     output = {'list': output_list, 'sum': output_sum}
     return JSONEncoder().encode(output), 200
 
+
 @app.route('/user', methods=['PUT'])
 def update_password():
     """
-    @api {PUT} /user update the user password
+    @api {PUT} /user update user password
     @apiName update_password
     @apiGroup user
 
@@ -105,7 +106,7 @@ def update_password():
 @app.route('/user', methods=['DELETE'])
 def delete_account():
     """
-    @api {DELETE} /user delete an account
+    @api {DELETE} /user delete account
     @apiName delete_account
     @apiGroup user
 

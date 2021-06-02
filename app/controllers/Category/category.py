@@ -10,7 +10,7 @@ from app.utils.JSONEncoder import JSONEncoder
 @app.route('/category', methods=['GET'])
 def get_category():
     """
-    @api {GET} /user get category expenses
+    @api {GET} /user get category
     @apiName get_category
     @apiGroup category
 
@@ -73,7 +73,7 @@ def get_category():
 @app.route('/category', methods=['PUT'])
 def update_category():
     """
-    @api {PUT} /category update an available category name
+    @api {PUT} /category update category
     @apiName update_category
     @apiGroup category
 
@@ -110,7 +110,7 @@ def update_category():
 @app.route('/category', methods=['DELETE'])
 def delete_category():
     """
-    @api {DELETE} /category delete an available category
+    @api {DELETE} /category delete category
     @apiName delete_category
     @apiGroup category
 

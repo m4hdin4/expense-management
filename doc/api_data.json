@@ -2,7 +2,7 @@
   {
     "type": "DELETE",
     "url": "/category",
-    "title": "delete an available category",
+    "title": "delete category",
     "name": "delete_category",
     "group": "category",
     "header": {
@@ -58,7 +58,7 @@
   {
     "type": "GET",
     "url": "/user",
-    "title": "get category expenses",
+    "title": "get category",
     "name": "get_category",
     "group": "category",
     "header": {
@@ -114,7 +114,7 @@
   {
     "type": "PUT",
     "url": "/category",
-    "title": "update an available category name",
+    "title": "update category",
     "name": "update_category",
     "group": "category",
     "header": {
@@ -173,7 +173,7 @@
   {
     "type": "DELETE",
     "url": "/item",
-    "title": "delete an available expense",
+    "title": "delete item",
     "name": "delete",
     "group": "item",
     "header": {
@@ -229,7 +229,7 @@
   {
     "type": "GET",
     "url": "/item",
-    "title": "get one item",
+    "title": "get item",
     "name": "get_one",
     "group": "item",
     "header": {
@@ -285,7 +285,7 @@
   {
     "type": "POST",
     "url": "/item",
-    "title": "insert a new expense",
+    "title": "insert item",
     "name": "insert",
     "group": "item",
     "header": {
@@ -351,7 +351,7 @@
   {
     "type": "PUT",
     "url": "/item",
-    "title": "update an available item",
+    "title": "update item",
     "name": "update",
     "group": "item",
     "header": {
@@ -424,7 +424,7 @@
   {
     "type": "DELETE",
     "url": "/user",
-    "title": "delete an account",
+    "title": "delete account",
     "name": "delete_account",
     "group": "user",
     "header": {
@@ -476,7 +476,7 @@
   {
     "type": "GET",
     "url": "/user",
-    "title": "get user expenses",
+    "title": "get user list",
     "name": "get_list",
     "group": "user",
     "header": {
@@ -519,7 +519,7 @@
   {
     "type": "UNLOCK",
     "url": "/login",
-    "title": "log in users account",
+    "title": "login",
     "name": "login",
     "group": "user",
     "body": [
@@ -565,7 +565,7 @@
   {
     "type": "POST",
     "url": "/signup",
-    "title": "insert a new user",
+    "title": "signup",
     "name": "signup",
     "group": "user",
     "body": [
@@ -611,7 +611,7 @@
   {
     "type": "PUT",
     "url": "/user",
-    "title": "update the user password",
+    "title": "update user password",
     "name": "update_password",
     "group": "user",
     "header": {
