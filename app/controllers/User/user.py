@@ -10,6 +10,7 @@ from datetime import timedelta
 import hashlib
 import uuid
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 
 @app.route('/signup', methods=['POST'])
@@ -22,25 +23,28 @@ def signup():
     @apiBody {String} username
     @apiBody {String} password
 
-    @apiSuccess {String} returns inserted user id(username)
+    @apiSuccess {Object} returns json contains username
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 201 CREATED
-        m4hdin4
+            {
+                "username": m4hdin4,
+                "message": "user added"
+            }
     """
     try:
         validate(instance=request.json, schema=Identification_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     username = request.json['username']
     password = request.json['password']
     if User.objects(username=username).first() is not None:
-        return "user exists", 403
+        return JSONEncoder().encode({"message": "user exists"}), 403
     try:
         User(username=username, password=str(hashlib.md5(password.encode()).hexdigest())).save()
-        return username, 201
+        return JSONEncoder().encode({"username": username, "message": "user added"}), 201
     except Exception as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
+        return JSONEncoder().encode({"error": str(e)}), 400
 
 
 @app.route('/login', methods=['POST'])
@@ -53,15 +57,18 @@ def login():
     @apiBody {String} username
     @apiBody {String} password
 
-    @apiSuccess {String} returns a token - a unique session id that is valid for each login for 3 hours
+    @apiSuccess {Object} returns json contains a token - a unique session id that is valid for each login for 3 hours
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        9d2db59d-5d16-4773-adb1-f39e71321e4f
+        {
+            "token": "9d2db59d-5d16-4773-adb1-f39e71321e4f",
+            "message": "login successful"
+        }
     """
     try:
         validate(instance=request.json, schema=Identification_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     username = request.json['username']
     password = request.json['password']
@@ -70,7 +77,7 @@ def login():
         token = str(uuid.uuid4())
         redisClient.set(token, username)
         redisClient.expire(token, timedelta(hours=3))
-        return token, 200
+        return JSONEncoder().encode({"token": token, "message": "login successful"}), 200
     except:
         return JSONEncoder().encode({"error": "you should login first"}), 401
 
@@ -112,7 +119,7 @@ def get_list():
         }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
@@ -143,20 +150,23 @@ def update_password():
     @apiBody {String} new_password
     @apiBody {String} old_password
 
-    @apiSuccess {String} returns username
+    @apiSuccess {Object} returns json contains username
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        m4hdin4
+            {
+                "username": "m4hdin4",
+                "message": "password changed"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Password_Change_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     old_password = request.json['old_password']
     new_password = request.json['new_password']
@@ -164,9 +174,9 @@ def update_password():
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         User.objects(username=user.username).update_one(set__password=str(hashlib.md5(new_password.encode()).hexdigest()))
-        return user.username
+        return JSONEncoder().encode({"username": user.username, "message": "password changed"}), 200
     except Exception as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
+        return JSONEncoder().encode({"error": str(e)}), 400
 
 
 @app.route('/user', methods=['DELETE'])
@@ -180,20 +190,22 @@ def delete_account():
 
     @apiBody {String} password
 
-    @apiSuccess {String} returns text "DELETED"
+    @apiSuccess {Object} returns json contains a message
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        DELETED
+            {
+                "message": "DELETED"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Check_Password_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     password = request.json['password']
     if user.password != str(hashlib.md5(password.encode()).hexdigest()):
@@ -203,4 +215,4 @@ def delete_account():
         Item.objects(category=category).delete()
         category.delete()
     user.delete()
-    return 'DELETED', 200
+    return JSONEncoder().encode({"message": "DELETED"}), 200

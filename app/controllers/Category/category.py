@@ -7,6 +7,7 @@ from app.controllers.User.get_user_by_token import get_user_by_token
 from flask import request
 from app.utils.JSONEncoder import JSONEncoder
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 
 @app.route('/category', methods=['POST'])
@@ -20,24 +21,28 @@ def insert_category():
 
     @apiBody {String} category
 
-    @apiSuccess {String} returns category name
+    @apiSuccess {Object} returns json contains category name
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 201 CREATED
+            {
+                "category": "test_category1",
+                "message": "category added"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Get_Category_Schema)
-        category = request.json['category']
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     else:
+        category = request.json['category']
         Category(category_name=category, user=user).save()
-        return category, 201
+        return JSONEncoder().encode({"category": category, "message": "category added"}), 201
 
 
 @app.route('/category', methods=['GET'])
@@ -79,13 +84,13 @@ def get_category():
         }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.args, schema=Get_Category_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     category = request.args['category']
     category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
@@ -116,29 +121,31 @@ def update_category():
     @apiBody {String} new_category
     @apiBody {String} old_category
 
-    @apiSuccess {String} returns updated category name
+    @apiSuccess {Object} returns json contains updated category name
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        updated_category
+            {
+                "category_name": "updated_category"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Update_Category_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     old_category = request.json['old_category']
     new_category = request.json['new_category']
 
     flag = Category.objects(Q(category_name=old_category) & Q(user=user)).update_one(set__category_name=new_category)
     if flag == 1:
-        return new_category
+        return JSONEncoder().encode({"category_name": new_category}), 200
     else:
-        return "not found", 404
+        return JSONEncoder().encode({"error": "not found"}), 404
 
 
 @app.route('/category', methods=['DELETE'])
@@ -152,26 +159,28 @@ def delete_category():
 
     @apiParam {String} category
 
-    @apiSuccess {String} returns text "DELETED"
+    @apiSuccess {Object} returns json contains a message
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        DELETED
+            {
+                "message": "DELETED"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.args, schema=Delete_Category_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     category = request.args['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
         Item.objects(category=category_item).delete()
         category_item.delete()
-        return 'DELETED'
+        return JSONEncoder().encode({"message": "DELETED"}), 200
     except:
         return JSONEncoder().encode({"error": "not found"}), 404

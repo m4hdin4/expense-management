@@ -7,6 +7,7 @@ from mongoengine import Q
 from app.controllers.User.get_user_by_token import get_user_by_token
 from flask import request
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 
 @app.route('/item', methods=['GET'])
@@ -40,7 +41,7 @@ def get_one():
         }
     """
     if not request.headers or 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     try:
         validate(instance=request.args, schema=Get_Item_Schema)
     except Exception as e:
@@ -76,20 +77,23 @@ def insert():
     @apiBody {Number} product_price
     @apiBody {String} category
 
-    @apiSuccess {String} returns inserted object id
+    @apiSuccess {Object} returns json contains inserted object id
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 201 CREATED
-        60b4c7da7ba96ba33ab0d978
+            {
+                "spend_id": "60b4c7da7ba96ba33ab0d978",
+                "message": "item added"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Insert_Item_Schema)
-    except Exception as e:
+    except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     product_name = request.json['product_name']
     product_price = request.json['product_price']
@@ -97,13 +101,13 @@ def insert():
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
     except Exception as e:
-        return JSONEncoder().encode({"error": e}), 404
+        return JSONEncoder().encode({"error": str(e)}), 404
     try:
         inserted = Item(product_name=product_name, product_price=product_price,
                         category=category_item, user=user).save()
-        return str(inserted.id), 201
+        return JSONEncoder().encode({"spend_id": str(inserted.id), "message": "item added"}), 201
     except Exception as e:
-        return JSONEncoder().encode({"error": e}), 400
+        return JSONEncoder().encode({"error": str(e)}), 400
 
 
 @app.route('/item', methods=['PUT'])
@@ -120,14 +124,17 @@ def update():
     @apiBody {String} category
     @apiBody {String} spend_id
 
-    @apiSuccess {String} returns updated object id
+    @apiSuccess {Object} returns json contains updated object id
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        60b4c7da7ba96ba33ab0d978
+            {
+                "spend_id": "60b4c7da7ba96ba33ab0d978",
+                "message": "item updated"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
@@ -140,7 +147,7 @@ def update():
     product_price = request.json['product_price']
     category = request.json['category']
     if Item.objects(Q(id=spend_id) & Q(user=user)).first() is None:
-        return 'not found', 404
+        return JSONEncoder().encode({"error": "not found"}), 404
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
     except Exception as e:
@@ -149,7 +156,7 @@ def update():
         Item.objects(Q(id=spend_id) & Q(user=user)).update_one(set__product_name=product_name,
                                                                set__product_price=product_price,
                                                                set__category=category_item)
-        return spend_id
+        return JSONEncoder().encode({"spend_id": spend_id, "error": "item updated"}), 200
     except Exception as e:
         return JSONEncoder().encode({"error": e}), 400
 
@@ -165,14 +172,16 @@ def delete():
 
     @apiParam {String} spend_id
 
-    @apiSuccess {String} returns text "DELETED"
+    @apiSuccess {Object} returns json contains a message
 
     @apiSuccessExample Success-Response:
         HTTP/1.1 200 OK
-        DELETED
+            {
+                "message": "DELETED"
+            }
     """
     if 'token' not in request.headers:
-        return "authorization failed", 400
+        return JSONEncoder().encode({"error": "authorization failed"}), 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
@@ -183,9 +192,9 @@ def delete():
     spend_id = request.args['spend_id']
     query = Item.objects(Q(id=spend_id) & Q(user=user))
     if query.first() is None:
-        return "not found", 404
+        return JSONEncoder().encode({"error": "not found"}), 404
     try:
         query.delete()
-        return 'DELETED'
-    except Exception as e:
+        return JSONEncoder().encode({"message": "DELETED"}), 200
+    except:
         return JSONEncoder().encode({"error": "not found"}), 400

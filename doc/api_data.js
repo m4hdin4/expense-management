@@ -36,17 +36,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>text &quot;DELETED&quot;</p>"
+            "description": "<p>json contains a message</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nDELETED",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"message\": \"DELETED\"\n    }",
           "type": "json"
         }
       ]
@@ -112,6 +112,58 @@ define({ "api": [
     "groupTitle": "category"
   },
   {
+    "type": "POST",
+    "url": "/category",
+    "title": "insert category",
+    "name": "insert_category",
+    "group": "category",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "body": [
+      {
+        "group": "Body",
+        "type": "String",
+        "optional": false,
+        "field": "category",
+        "description": ""
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "returns",
+            "description": "<p>json contains category name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 CREATED\n    {\n        \"category\": \"test_category1\",\n        \"message\": \"category added\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/controllers/Category/category.py",
+    "groupTitle": "category"
+  },
+  {
     "type": "PUT",
     "url": "/category",
     "title": "update category",
@@ -151,17 +203,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>updated category name</p>"
+            "description": "<p>json contains updated category name</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nupdated_category",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"category_name\": \"updated_category\"\n    }",
           "type": "json"
         }
       ]
@@ -207,17 +259,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>text &quot;DELETED&quot;</p>"
+            "description": "<p>json contains a message</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nDELETED",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"message\": \"DELETED\"\n    }",
           "type": "json"
         }
       ]
@@ -329,17 +381,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>inserted object id</p>"
+            "description": "<p>json contains inserted object id</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n60b4c7da7ba96ba33ab0d978",
+          "content": "HTTP/1.1 201 CREATED\n    {\n        \"spend_id\": \"60b4c7da7ba96ba33ab0d978\",\n        \"message\": \"item added\"\n    }",
           "type": "json"
         }
       ]
@@ -402,17 +454,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>updated object id</p>"
+            "description": "<p>json contains updated object id</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n60b4c7da7ba96ba33ab0d978",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"spend_id\": \"60b4c7da7ba96ba33ab0d978\",\n        \"message\": \"item updated\"\n    }",
           "type": "json"
         }
       ]
@@ -454,17 +506,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>text &quot;DELETED&quot;</p>"
+            "description": "<p>json contains a message</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nDELETED",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"message\": \"DELETED\"\n    }",
           "type": "json"
         }
       ]
@@ -543,23 +595,23 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>a token - a unique session id that is valid for each login for 3 hours</p>"
+            "description": "<p>json contains a token - a unique session id that is valid for each login for 3 hours</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n9d2db59d-5d16-4773-adb1-f39e71321e4f",
+          "content": "HTTP/1.1 200 OK\n{\n    \"token\": \"9d2db59d-5d16-4773-adb1-f39e71321e4f\",\n    \"message\": \"login successful\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/User/login.py",
+    "filename": "app/controllers/User/user.py",
     "groupTitle": "user"
   },
   {
@@ -589,23 +641,23 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>inserted user id(username)</p>"
+            "description": "<p>json contains username</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nm4hdin4",
+          "content": "HTTP/1.1 201 CREATED\n    {\n        \"username\": m4hdin4,\n        \"message\": \"user added\"\n    }",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "app/controllers/User/signup.py",
+    "filename": "app/controllers/User/user.py",
     "groupTitle": "user"
   },
   {
@@ -648,17 +700,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
             "field": "returns",
-            "description": "<p>username</p>"
+            "description": "<p>json contains username</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nm4hdin4",
+          "content": "HTTP/1.1 200 OK\n    {\n        \"username\": \"m4hdin4\",\n        \"message\": \"password changed\"\n    }",
           "type": "json"
         }
       ]
