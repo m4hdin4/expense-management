@@ -1,20 +1,20 @@
 {
-	"id": "45ce0b81-8bdc-4d2a-a76f-68a9b4682611",
+	"id": "193282fa-07df-4ca3-ac93-b652f0819d5a",
 	"name": "expense management",
-	"timestamp": "2021-06-01T12:35:27.607Z",
+	"timestamp": "2021-06-05T16:20:59.828Z",
 	"collection_id": "5e271f71-c70c-40c0-914c-a4c94b078da7",
 	"folder_id": 0,
 	"environment_id": "816caf90-b71f-4197-a8f0-d6b08ec73b1d",
-	"totalPass": 123,
+	"totalPass": 135,
 	"totalFail": 0,
 	"results": [
 		{
 			"id": "dd46ea25-bd31-4de4-93ee-0bbf62acbbef",
-			"name": "200",
-			"time": 8,
+			"name": "user-signup-201",
+			"time": 9,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 201,
+				"name": "CREATED"
 			},
 			"tests": {
 				"Status test": true
@@ -26,9 +26,9 @@
 				}
 			},
 			"times": [
-				51,
+				41,
 				9,
-				8
+				9
 			],
 			"allTests": [
 				{
@@ -44,7 +44,7 @@
 		},
 		{
 			"id": "802d6215-1e7a-49c7-aa4a-6c8a6b525af2",
-			"name": "400",
+			"name": "user-signup-400",
 			"time": 7,
 			"responseCode": {
 				"code": 400,
@@ -60,7 +60,7 @@
 				}
 			},
 			"times": [
-				9,
+				7,
 				7,
 				7
 			],
@@ -78,8 +78,8 @@
 		},
 		{
 			"id": "39c4f41c-a2d9-474e-b9ee-ea4fdbb13a8d",
-			"name": "403",
-			"time": 7,
+			"name": "user-signup-403",
+			"time": 11,
 			"responseCode": {
 				"code": 403,
 				"name": "FORBIDDEN"
@@ -94,9 +94,9 @@
 				}
 			},
 			"times": [
-				28,
-				9,
-				7
+				11,
+				12,
+				11
 			],
 			"allTests": [
 				{
@@ -112,7 +112,7 @@
 		},
 		{
 			"id": "787211a0-7290-4e76-8534-0d7739bdd9e7",
-			"name": "200",
+			"name": "user-login-200",
 			"time": 9,
 			"responseCode": {
 				"code": 200,
@@ -128,8 +128,8 @@
 				}
 			},
 			"times": [
-				2023,
-				9,
+				2019,
+				8,
 				9
 			],
 			"allTests": [
@@ -146,8 +146,8 @@
 		},
 		{
 			"id": "e23f50ce-bdfc-4e62-a561-0b02b19ae68c",
-			"name": "400",
-			"time": 6,
+			"name": "user-login-400",
+			"time": 8,
 			"responseCode": {
 				"code": 400,
 				"name": "BAD REQUEST"
@@ -162,9 +162,9 @@
 				}
 			},
 			"times": [
-				19,
-				6,
-				6
+				8,
+				9,
+				8
 			],
 			"allTests": [
 				{
@@ -180,8 +180,8 @@
 		},
 		{
 			"id": "61aadc05-4100-40c4-8031-048aa2445b27",
-			"name": "401",
-			"time": 7,
+			"name": "user-login-401",
+			"time": 8,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -196,9 +196,9 @@
 				}
 			},
 			"times": [
-				26,
+				11,
 				8,
-				7
+				8
 			],
 			"allTests": [
 				{
@@ -213,148 +213,12 @@
 			]
 		},
 		{
-			"id": "2c3cd936-8ba0-4aaa-83ab-020949444ef4",
-			"name": "200",
-			"time": 11,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				192,
-				13,
-				11
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "fad9689f-efc1-4a0b-bd5a-6ad0bac0d96c",
-			"name": "200",
-			"time": 14,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				28,
-				14,
-				14
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "17fc77f3-6d29-4583-bcf6-5477806bc7ba",
-			"name": "400",
-			"time": 7,
-			"responseCode": {
-				"code": 400,
-				"name": "BAD REQUEST"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				12,
-				7,
-				7
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "db9dc05c-6d18-469e-ade8-7b8faa902f47",
-			"name": "401",
-			"time": 6,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				8,
-				6,
-				6
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "2b990d10-0df3-4388-b278-12710c9135ff",
-			"name": "200",
+			"id": "4b22c463-b4c8-4e39-963e-312a6ca12b8c",
+			"name": "category-insert_category-201",
 			"time": 13,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 201,
+				"name": "CREATED"
 			},
 			"tests": {
 				"Status test": true
@@ -366,8 +230,8 @@
 				}
 			},
 			"times": [
-				26,
-				14,
+				131,
+				15,
 				13
 			],
 			"allTests": [
@@ -383,80 +247,12 @@
 			]
 		},
 		{
-			"id": "06f5d2a9-6fd4-4e8c-8ce2-be7d132a38a7",
-			"name": "400",
-			"time": 7,
-			"responseCode": {
-				"code": 400,
-				"name": "BAD REQUEST"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				6,
-				6,
-				7
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "f75f901a-557f-410e-ae95-758f1af2b3a6",
-			"name": "401",
-			"time": 6,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				8,
-				6,
-				6
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "9b70ed02-4052-4f93-9309-134c3d7e0c08",
-			"name": "200",
+			"id": "700c5ca9-f2bf-46f6-8388-2144cd85d798",
+			"name": "category-insert_category-201",
 			"time": 11,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 201,
+				"name": "CREATED"
 			},
 			"tests": {
 				"Status test": true
@@ -468,7 +264,7 @@
 				}
 			},
 			"times": [
-				12,
+				10,
 				11,
 				11
 			],
@@ -485,8 +281,246 @@
 			]
 		},
 		{
-			"id": "8ccee27f-b6c9-4d4d-94a1-349b648ab0d3",
-			"name": "400",
+			"id": "ae0a2add-d972-45bf-83ac-d7bbb668cc0d",
+			"name": "category-insert_category-400",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				9,
+				8
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "0cbb47c8-b796-486f-b9f0-a03d60c220a6",
+			"name": "category-insert_category-401",
+			"time": 9,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				7,
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "2c3cd936-8ba0-4aaa-83ab-020949444ef4",
+			"name": "item-insert-201",
+			"time": 16,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				50,
+				17,
+				16
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "fad9689f-efc1-4a0b-bd5a-6ad0bac0d96c",
+			"name": "item-insert-201",
+			"time": 12,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				14,
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "17fc77f3-6d29-4583-bcf6-5477806bc7ba",
+			"name": "item-insert-400",
+			"time": 11,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				9,
+				11
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "db9dc05c-6d18-469e-ade8-7b8faa902f47",
+			"name": "item-insert-401",
+			"time": 7,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				9,
+				7
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "2b990d10-0df3-4388-b278-12710c9135ff",
+			"name": "user-get_list-200",
+			"time": 43,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				13,
+				15,
+				43
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "06f5d2a9-6fd4-4e8c-8ce2-be7d132a38a7",
+			"name": "user-get_list-400",
 			"time": 6,
 			"responseCode": {
 				"code": 400,
@@ -502,7 +536,7 @@
 				}
 			},
 			"times": [
-				6,
+				8,
 				7,
 				6
 			],
@@ -519,9 +553,9 @@
 			]
 		},
 		{
-			"id": "59a1dd4f-c224-4b9e-a18c-d92167289527",
-			"name": "401",
-			"time": 5,
+			"id": "f75f901a-557f-410e-ae95-758f1af2b3a6",
+			"name": "user-get_list-401",
+			"time": 7,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -536,9 +570,9 @@
 				}
 			},
 			"times": [
-				7,
-				7,
-				5
+				8,
+				13,
+				7
 			],
 			"allTests": [
 				{
@@ -553,9 +587,9 @@
 			]
 		},
 		{
-			"id": "02f2c6fd-7835-4fb6-8c26-e5ee7e0fb4ee",
-			"name": "200",
-			"time": 15,
+			"id": "9b70ed02-4052-4f93-9309-134c3d7e0c08",
+			"name": "item-get_one-200",
+			"time": 13,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -571,8 +605,110 @@
 			},
 			"times": [
 				16,
-				11,
-				15
+				15,
+				13
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "8ccee27f-b6c9-4d4d-94a1-349b648ab0d3",
+			"name": "item-get_one-400",
+			"time": 5,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				6,
+				6,
+				5
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "59a1dd4f-c224-4b9e-a18c-d92167289527",
+			"name": "item-get_one-401",
+			"time": 9,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				10,
+				9,
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "02f2c6fd-7835-4fb6-8c26-e5ee7e0fb4ee",
+			"name": "category-get_category-200",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				19,
+				17
 			],
 			"allTests": [
 				{
@@ -588,7 +724,7 @@
 		},
 		{
 			"id": "d2fc3b71-f548-40b5-bc15-1421ce3aa531",
-			"name": "400",
+			"name": "category-get_category-400",
 			"time": 5,
 			"responseCode": {
 				"code": 400,
@@ -622,7 +758,7 @@
 		},
 		{
 			"id": "fe782c79-642c-4cf7-b980-e56723579822",
-			"name": "401",
+			"name": "category-get_category-401",
 			"time": 7,
 			"responseCode": {
 				"code": 401,
@@ -638,8 +774,8 @@
 				}
 			},
 			"times": [
-				10,
 				6,
+				9,
 				7
 			],
 			"allTests": [
@@ -656,8 +792,8 @@
 		},
 		{
 			"id": "427886d7-83e1-4388-8a3a-0f393e1de49a",
-			"name": "200",
-			"time": 13,
+			"name": "item-update-200",
+			"time": 22,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -673,8 +809,8 @@
 			},
 			"times": [
 				19,
-				12,
-				13
+				20,
+				22
 			],
 			"allTests": [
 				{
@@ -690,7 +826,7 @@
 		},
 		{
 			"id": "8bcd6a56-2e76-408a-9230-b5789698f8a5",
-			"name": "400",
+			"name": "item-update-400",
 			"time": 6,
 			"responseCode": {
 				"code": 400,
@@ -707,7 +843,7 @@
 			},
 			"times": [
 				7,
-				6,
+				10,
 				6
 			],
 			"allTests": [
@@ -724,8 +860,8 @@
 		},
 		{
 			"id": "aa7971cf-9a97-4699-92cd-a834f8817b0f",
-			"name": "401",
-			"time": 6,
+			"name": "item-update-401",
+			"time": 13,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -741,8 +877,8 @@
 			},
 			"times": [
 				7,
-				7,
-				6
+				6,
+				13
 			],
 			"allTests": [
 				{
@@ -758,7 +894,7 @@
 		},
 		{
 			"id": "3d754340-04e0-4cbc-bc6c-f25fc3fde3a5",
-			"name": "404",
+			"name": "item-update-404",
 			"time": 10,
 			"responseCode": {
 				"code": 404,
@@ -774,8 +910,8 @@
 				}
 			},
 			"times": [
-				15,
-				9,
+				12,
+				10,
 				10
 			],
 			"allTests": [
@@ -792,8 +928,8 @@
 		},
 		{
 			"id": "09cab069-e8ec-4b69-bef8-7264268245f4",
-			"name": "200",
-			"time": 9,
+			"name": "category-update_category-200",
+			"time": 13,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -808,9 +944,9 @@
 				}
 			},
 			"times": [
-				11,
-				11,
-				9
+				19,
+				13,
+				13
 			],
 			"allTests": [
 				{
@@ -826,8 +962,8 @@
 		},
 		{
 			"id": "d4b76276-2d49-45eb-8eb0-4076d145500a",
-			"name": "400",
-			"time": 8,
+			"name": "category-update_category-400",
+			"time": 9,
 			"responseCode": {
 				"code": 400,
 				"name": "BAD REQUEST"
@@ -842,76 +978,8 @@
 				}
 			},
 			"times": [
-				6,
-				6,
-				8
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "34ad8bf9-99ae-4b75-991f-c03482639f36",
-			"name": "401",
-			"time": 7,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				6,
-				6,
-				7
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "8c3fe458-d3f3-40e6-b04c-074008c594b9",
-			"name": "404",
-			"time": 9,
-			"responseCode": {
-				"code": 404,
-				"name": "NOT FOUND"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
 				10,
-				8,
+				10,
 				9
 			],
 			"allTests": [
@@ -927,9 +995,77 @@
 			]
 		},
 		{
+			"id": "34ad8bf9-99ae-4b75-991f-c03482639f36",
+			"name": "category-update_category-401",
+			"time": 8,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				8,
+				8
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "8c3fe458-d3f3-40e6-b04c-074008c594b9",
+			"name": "category-update_category-404",
+			"time": 13,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				15,
+				16,
+				13
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
 			"id": "5aa58be9-3758-43e4-9cb9-497fb8f6764c",
-			"name": "200",
-			"time": 11,
+			"name": "item-delete-200",
+			"time": 13,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -944,9 +1080,9 @@
 				}
 			},
 			"times": [
-				11,
-				11,
-				11
+				12,
+				14,
+				13
 			],
 			"allTests": [
 				{
@@ -962,8 +1098,8 @@
 		},
 		{
 			"id": "abc36e67-4781-4efb-9650-33f678aab25b",
-			"name": "400",
-			"time": 7,
+			"name": "item-delete-400",
+			"time": 6,
 			"responseCode": {
 				"code": 400,
 				"name": "BAD REQUEST"
@@ -978,42 +1114,8 @@
 				}
 			},
 			"times": [
-				8,
-				5,
-				7
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "30521983-001c-4f52-ba44-14629ff4cb1e",
-			"name": "401",
-			"time": 6,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
+				9,
 				6,
-				19,
 				6
 			],
 			"allTests": [
@@ -1029,8 +1131,42 @@
 			]
 		},
 		{
+			"id": "30521983-001c-4f52-ba44-14629ff4cb1e",
+			"name": "item-delete-401",
+			"time": 7,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				6,
+				8,
+				7
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
 			"id": "f80a55bd-8356-4f33-9662-6e1738328a23",
-			"name": "404",
+			"name": "item-delete-404",
 			"time": 12,
 			"responseCode": {
 				"code": 404,
@@ -1064,7 +1200,7 @@
 		},
 		{
 			"id": "f1ecabc5-cdb5-4e68-9cde-96a7930de1a4",
-			"name": "200",
+			"name": "category-delete_category-200",
 			"time": 12,
 			"responseCode": {
 				"code": 200,
@@ -1080,8 +1216,8 @@
 				}
 			},
 			"times": [
-				12,
-				15,
+				16,
+				19,
 				12
 			],
 			"allTests": [
@@ -1098,8 +1234,8 @@
 		},
 		{
 			"id": "be71298c-fd45-407e-a272-23c5268059fa",
-			"name": "400",
-			"time": 6,
+			"name": "category-delete_category-400",
+			"time": 7,
 			"responseCode": {
 				"code": 400,
 				"name": "BAD REQUEST"
@@ -1114,42 +1250,8 @@
 				}
 			},
 			"times": [
+				5,
 				6,
-				6,
-				6
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "1020ba99-b324-4f40-ad77-2ab8ac1da505",
-			"name": "401",
-			"time": 7,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				7,
-				9,
 				7
 			],
 			"allTests": [
@@ -1165,9 +1267,43 @@
 			]
 		},
 		{
+			"id": "1020ba99-b324-4f40-ad77-2ab8ac1da505",
+			"name": "category-delete_category-401",
+			"time": 8,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				6,
+				7,
+				8
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
 			"id": "594cac96-e1ea-4556-90f6-1514405d3717",
-			"name": "404",
-			"time": 10,
+			"name": "category-delete_category-404",
+			"time": 12,
 			"responseCode": {
 				"code": 404,
 				"name": "NOT FOUND"
@@ -1182,9 +1318,9 @@
 				}
 			},
 			"times": [
-				10,
-				10,
-				10
+				12,
+				14,
+				12
 			],
 			"allTests": [
 				{
@@ -1200,7 +1336,7 @@
 		},
 		{
 			"id": "478e38ce-d95f-4ed4-a17b-740e91fd62a2",
-			"name": "200",
+			"name": "user-update_password-200",
 			"time": 11,
 			"responseCode": {
 				"code": 200,
@@ -1216,8 +1352,8 @@
 				}
 			},
 			"times": [
-				10,
-				11,
+				15,
+				13,
 				11
 			],
 			"allTests": [
@@ -1234,8 +1370,8 @@
 		},
 		{
 			"id": "19c2a972-798a-48e6-a81e-c0c8b42c9f45",
-			"name": "400",
-			"time": 6,
+			"name": "user-update_password-400",
+			"time": 9,
 			"responseCode": {
 				"code": 400,
 				"name": "BAD REQUEST"
@@ -1250,42 +1386,8 @@
 				}
 			},
 			"times": [
-				6,
-				7,
-				6
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "bee2a7a2-b550-4254-b675-c87bf64d6803",
-			"name": "401",
-			"time": 9,
-			"responseCode": {
-				"code": 401,
-				"name": "UNAUTHORIZED"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				16,
-				8,
+				12,
+				9,
 				9
 			],
 			"allTests": [
@@ -1301,43 +1403,9 @@
 			]
 		},
 		{
-			"id": "31715562-5d38-4517-98b7-e173def5f4c0",
-			"name": "400",
-			"time": 5,
-			"responseCode": {
-				"code": 400,
-				"name": "BAD REQUEST"
-			},
-			"tests": {
-				"Status test": true
-			},
-			"testPassFailCounts": {
-				"Status test": {
-					"pass": 3,
-					"fail": 0
-				}
-			},
-			"times": [
-				7,
-				6,
-				5
-			],
-			"allTests": [
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				},
-				{
-					"Status test": true
-				}
-			]
-		},
-		{
-			"id": "bfd60b72-bfaa-4032-9e62-9d8c80c327de",
-			"name": "401",
-			"time": 9,
+			"id": "bee2a7a2-b550-4254-b675-c87bf64d6803",
+			"name": "user-update_password-401",
+			"time": 12,
 			"responseCode": {
 				"code": 401,
 				"name": "UNAUTHORIZED"
@@ -1353,6 +1421,74 @@
 			},
 			"times": [
 				12,
+				11,
+				12
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "31715562-5d38-4517-98b7-e173def5f4c0",
+			"name": "user-delete_account-400",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				10,
+				10
+			],
+			"allTests": [
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				},
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "bfd60b72-bfaa-4032-9e62-9d8c80c327de",
+			"name": "user-delete_account-401",
+			"time": 9,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
 				8,
 				9
 			],
@@ -1370,8 +1506,8 @@
 		},
 		{
 			"id": "16a17903-6e23-4fd5-a57e-a76c78747267",
-			"name": "200",
-			"time": 11,
+			"name": "user-delete_account-200",
+			"time": 14,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -1386,9 +1522,9 @@
 				}
 			},
 			"times": [
-				12,
-				12,
-				11
+				13,
+				15,
+				14
 			],
 			"allTests": [
 				{
@@ -1404,7 +1540,7 @@
 		}
 	],
 	"count": 3,
-	"totalTime": 3421,
+	"totalTime": 3644,
 	"collection": {
 		"requests": [
 			{
@@ -1421,15 +1557,31 @@
 			},
 			{
 				"id": "787211a0-7290-4e76-8534-0d7739bdd9e7",
-				"method": "UNLOCK"
+				"method": "POST"
 			},
 			{
 				"id": "e23f50ce-bdfc-4e62-a561-0b02b19ae68c",
-				"method": "UNLOCK"
+				"method": "POST"
 			},
 			{
 				"id": "61aadc05-4100-40c4-8031-048aa2445b27",
-				"method": "UNLOCK"
+				"method": "POST"
+			},
+			{
+				"id": "4b22c463-b4c8-4e39-963e-312a6ca12b8c",
+				"method": "POST"
+			},
+			{
+				"id": "700c5ca9-f2bf-46f6-8388-2144cd85d798",
+				"method": "POST"
+			},
+			{
+				"id": "ae0a2add-d972-45bf-83ac-d7bbb668cc0d",
+				"method": "POST"
+			},
+			{
+				"id": "0cbb47c8-b796-486f-b9f0-a03d60c220a6",
+				"method": "POST"
 			},
 			{
 				"id": "2c3cd936-8ba0-4aaa-83ab-020949444ef4",
