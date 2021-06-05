@@ -2,9 +2,11 @@ from app import app
 from app.models.Category import Category
 from app.models.Item import Item
 from app.utils.JSONEncoder import JSONEncoder
+from app.utils.serializer.item import *
 from mongoengine import Q
 from app.controllers.User.get_user_by_token import get_user_by_token
 from flask import request, abort
+from jsonschema import validate
 
 
 @app.route('/item', methods=['GET'])
@@ -37,13 +39,17 @@ def get_one():
             "sum": 10000
         }
     """
-    if not request.headers or \
-            not request.args or \
-            'token' not in request.headers or \
-            'spend_id' not in request.args:
+    if not request.headers or 'token' not in request.headers:
+        # not request.args or \
+
+        # 'spend_id' not in request.args:
+        abort(400)
+    try:
+        validate(instance=request.args, schema=Get_Item_Schema)
+        spend_id = request.args['spend_id']
+    except:
         abort(400)
     user = get_user_by_token(request.headers['token'])
-    spend_id = request.args['spend_id']
     if user is None:
         return 'you should login first', 401
     try:
@@ -76,30 +82,30 @@ def insert():
     @apiSuccess {String} returns inserted object id
 
     @apiSuccessExample Success-Response:
-        HTTP/1.1 200 OK
+        HTTP/1.1 201 CREATED
         60b4c7da7ba96ba33ab0d978
     """
-    if not request.json or \
-            not request.headers or \
-            'product_name' not in request.json or \
-            'product_price' not in request.json or \
-            'category' not in request.json or \
-            'token' not in request.headers:
+    if 'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         abort(401)
+    try:
+        validate(instance=request.json, schema=Insert_Item_Schema)
+    except Exception as e:
+        print(e)
+        abort(400)
     product_name = request.json['product_name']
     product_price = request.json['product_price']
     category = request.json['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
     except:
-        category_item = Category(category_name=category, user=user).save()
+        return "category not found", 404
     try:
         inserted = Item(product_name=product_name, product_price=product_price,
                         category=category_item, user=user).save()
-        return str(inserted.id)
+        return str(inserted.id), 201
     except:
         abort(400)
 
@@ -124,19 +130,15 @@ def update():
         HTTP/1.1 200 OK
         60b4c7da7ba96ba33ab0d978
     """
-    if not request.json or \
-            not request.headers or \
-            'product_name' not in request.json or \
-            'category' not in request.json or \
-            'product_price' not in request.json or \
-            'spend_id' not in request.json or \
-            'token' not in request.headers:
-        print("ok2")
+    if 'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
-
+    try:
+        validate(instance=request.json, schema=Update_Item_Schema)
+    except:
+        abort(400)
     spend_id = request.json['spend_id']
     product_name = request.json['product_name']
     product_price = request.json['product_price']
@@ -173,14 +175,15 @@ def delete():
         HTTP/1.1 200 OK
         DELETED
     """
-    if not request.args or \
-            not request.headers or \
-            'spend_id' not in request.args or \
-            'token' not in request.headers:
+    if 'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
+    try:
+        validate(instance=request.args, schema=Delete_Item_Schema)
+    except:
+        abort(400)
     spend_id = request.args['spend_id']
     query = Item.objects(Q(id=spend_id) & Q(user=user))
     if query.first() is None:

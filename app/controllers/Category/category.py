@@ -1,10 +1,43 @@
 from app import app
 from app.models.Item import Item
 from app.models.Category import Category
+from app.utils.serializer.category import *
 from mongoengine import Q
 from app.controllers.User.get_user_by_token import get_user_by_token
 from flask import request, abort
 from app.utils.JSONEncoder import JSONEncoder
+from jsonschema import validate
+
+
+@app.route('/category', methods=['POST'])
+def insert_category():
+    """
+    @api {POST} /category insert category
+    @apiName insert_category
+    @apiGroup category
+
+    @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
+
+    @apiBody {String} category
+
+    @apiSuccess {String} returns category name
+
+    @apiSuccessExample Success-Response:
+        HTTP/1.1 201 CREATED
+    """
+    if not request.headers or 'token' not in request.headers:
+        abort(400)
+    user = get_user_by_token(request.headers['token'])
+    if user is None:
+        return 'you should login first', 401
+    try:
+        validate(instance=request.json, schema=Get_Category_Schema)
+        category = request.json['category']
+    except:
+        abort(400)
+    else:
+        Category(category_name=category, user=user).save()
+        return category, 201
 
 
 @app.route('/category', methods=['GET'])
@@ -88,15 +121,16 @@ def update_category():
         HTTP/1.1 200 OK
         updated_category
     """
-    if not request.json or \
-            not request.headers or \
-            'old_category' not in request.json or \
-            'new_category' not in request.json or \
-            'token' not in request.headers:
+    if 'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
+    try:
+        validate(instance=request.json, schema=Update_Category_Schema)
+    except Exception as e:
+        print(e)
+        abort(400)
     old_category = request.json['old_category']
     new_category = request.json['new_category']
 
@@ -124,14 +158,15 @@ def delete_category():
         HTTP/1.1 200 OK
         DELETED
     """
-    if not request.args or \
-            not request.headers or \
-            'category' not in request.args or \
-            'token' not in request.headers:
+    if 'token' not in request.headers:
         abort(400)
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return 'you should login first', 401
+    try:
+        validate(instance=request.args, schema=Delete_Category_Schema)
+    except:
+        abort(400)
     category = request.args['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
