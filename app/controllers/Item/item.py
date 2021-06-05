@@ -5,7 +5,7 @@ from app.utils.JSONEncoder import JSONEncoder
 from app.utils.serializer.item import *
 from mongoengine import Q
 from app.controllers.User.get_user_by_token import get_user_by_token
-from flask import request, abort
+from flask import request
 from jsonschema import validate
 
 
@@ -40,20 +40,17 @@ def get_one():
         }
     """
     if not request.headers or 'token' not in request.headers:
-        # not request.args or \
-
-        # 'spend_id' not in request.args:
-        abort(400)
+        return "authorization failed", 400
     try:
         validate(instance=request.args, schema=Get_Item_Schema)
-        spend_id = request.args['spend_id']
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 400
+    spend_id = request.args['spend_id']
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
-        it = Item.objects(Q(id=spend_id) & Q(user=user)).first()
+        it = Item.objects(Q(id=spend_id) & Q(user=user))[0]
         output = {'list': [{"id": it.id,
                             "username": it.user.username,
                             "product_name": it.product_name,
@@ -86,28 +83,27 @@ def insert():
         60b4c7da7ba96ba33ab0d978
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        abort(401)
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Insert_Item_Schema)
     except Exception as e:
-        print(e)
-        abort(400)
+        return JSONEncoder().encode({"error": e.schema}), 400
     product_name = request.json['product_name']
     product_price = request.json['product_price']
     category = request.json['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
-    except:
-        return "category not found", 404
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 404
     try:
         inserted = Item(product_name=product_name, product_price=product_price,
                         category=category_item, user=user).save()
         return str(inserted.id), 201
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 400
 
 
 @app.route('/item', methods=['PUT'])
@@ -131,31 +127,31 @@ def update():
         60b4c7da7ba96ba33ab0d978
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Update_Item_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 400
     spend_id = request.json['spend_id']
     product_name = request.json['product_name']
     product_price = request.json['product_price']
     category = request.json['category']
     if Item.objects(Q(id=spend_id) & Q(user=user)).first() is None:
-        abort(404)
+        return 'not found', 404
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user))[0]
-    except:
-        category_item = Category(category_name=category, user=user).save()
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 404
     try:
         Item.objects(Q(id=spend_id) & Q(user=user)).update_one(set__product_name=product_name,
                                                                set__product_price=product_price,
                                                                set__category=category_item)
         return spend_id
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 400
 
 
 @app.route('/item', methods=['DELETE'])
@@ -176,20 +172,20 @@ def delete():
         DELETED
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.args, schema=Delete_Item_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e}), 400
     spend_id = request.args['spend_id']
     query = Item.objects(Q(id=spend_id) & Q(user=user))
     if query.first() is None:
-        abort(404)
+        return "not found", 404
     try:
         query.delete()
         return 'DELETED'
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": "not found"}), 400

@@ -4,7 +4,7 @@ from app.models.Category import Category
 from app.utils.serializer.category import *
 from mongoengine import Q
 from app.controllers.User.get_user_by_token import get_user_by_token
-from flask import request, abort
+from flask import request
 from app.utils.JSONEncoder import JSONEncoder
 from jsonschema import validate
 
@@ -25,16 +25,16 @@ def insert_category():
     @apiSuccessExample Success-Response:
         HTTP/1.1 201 CREATED
     """
-    if not request.headers or 'token' not in request.headers:
-        abort(400)
+    if 'token' not in request.headers:
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Get_Category_Schema)
         category = request.json['category']
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     else:
         Category(category_name=category, user=user).save()
         return category, 201
@@ -78,14 +78,15 @@ def get_category():
             "sum": 20000
         }
     """
-    if not request.headers or \
-            not request.args or \
-            'token' not in request.headers or \
-            'category' not in request.args:
-        abort(400)
+    if 'token' not in request.headers:
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
+    try:
+        validate(instance=request.args, schema=Get_Category_Schema)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     category = request.args['category']
     category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
     output_list = []
@@ -122,15 +123,14 @@ def update_category():
         updated_category
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Update_Category_Schema)
     except Exception as e:
-        print(e)
-        abort(400)
+        return JSONEncoder().encode({"error": e.schema}), 400
     old_category = request.json['old_category']
     new_category = request.json['new_category']
 
@@ -138,7 +138,7 @@ def update_category():
     if flag == 1:
         return new_category
     else:
-        abort(404)
+        return "not found", 404
 
 
 @app.route('/category', methods=['DELETE'])
@@ -159,14 +159,14 @@ def delete_category():
         DELETED
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.args, schema=Delete_Category_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     category = request.args['category']
     try:
         category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
@@ -174,4 +174,4 @@ def delete_category():
         category_item.delete()
         return 'DELETED'
     except:
-        abort(404)
+        return JSONEncoder().encode({"error": "not found"}), 404

@@ -5,7 +5,7 @@ from app.models.User import User
 from app.utils.JSONEncoder import JSONEncoder
 from app.controllers.User.get_user_by_token import get_user_by_token
 from app.utils.serializer.user import *
-from flask import request, abort
+from flask import request
 from datetime import timedelta
 import hashlib
 import uuid
@@ -30,8 +30,8 @@ def signup():
     """
     try:
         validate(instance=request.json, schema=Identification_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     username = request.json['username']
     password = request.json['password']
     if User.objects(username=username).first() is not None:
@@ -39,8 +39,8 @@ def signup():
     try:
         User(username=username, password=str(hashlib.md5(password.encode()).hexdigest())).save()
         return username, 201
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
 
 
 @app.route('/login', methods=['POST'])
@@ -61,8 +61,8 @@ def login():
     """
     try:
         validate(instance=request.json, schema=Identification_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     username = request.json['username']
     password = request.json['password']
     try:
@@ -72,7 +72,7 @@ def login():
         redisClient.expire(token, timedelta(hours=3))
         return token, 200
     except:
-        return 'username or password is wrong', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
 
 
 @app.route('/user', methods=['GET'])
@@ -112,10 +112,10 @@ def get_list():
         }
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     output_list = []
     query = Item.objects(user=user)
     for it in query:
@@ -150,23 +150,23 @@ def update_password():
         m4hdin4
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Password_Change_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     old_password = request.json['old_password']
     new_password = request.json['new_password']
     if user.password != str(hashlib.md5(old_password.encode()).hexdigest()):
-        return 'password is not correct', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         User.objects(username=user.username).update_one(set__password=str(hashlib.md5(new_password.encode()).hexdigest()))
         return user.username
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
 
 
 @app.route('/user', methods=['DELETE'])
@@ -187,17 +187,17 @@ def delete_account():
         DELETED
     """
     if 'token' not in request.headers:
-        abort(400)
+        return "authorization failed", 400
     user = get_user_by_token(request.headers['token'])
     if user is None:
-        return 'you should login first', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
         validate(instance=request.json, schema=Check_Password_Schema)
-    except:
-        abort(400)
+    except Exception as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
     password = request.json['password']
     if user.password != str(hashlib.md5(password.encode()).hexdigest()):
-        return 'password is not correct', 401
+        return JSONEncoder().encode({"error": "you should login first"}), 401
     query = Category.objects(user=user)
     for category in query:
         Item.objects(category=category).delete()
