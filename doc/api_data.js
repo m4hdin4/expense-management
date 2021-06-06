@@ -527,7 +527,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "/user",
+    "url": "/user_items",
     "title": "get user list",
     "name": "get_list",
     "group": "user",

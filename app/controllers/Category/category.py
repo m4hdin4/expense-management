@@ -3,7 +3,7 @@ from app.models.Item import Item
 from app.models.Category import Category
 from app.utils.serializer.category import *
 from mongoengine import Q
-from app.controllers.User.get_user_by_token import get_user_by_token
+from app.controllers.User.user import get_user_by_token
 from flask import request
 from app.utils.JSONEncoder import JSONEncoder
 from jsonschema import validate

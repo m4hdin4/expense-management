@@ -4,7 +4,7 @@ from app.models.Item import Item
 from app.utils.JSONEncoder import JSONEncoder
 from app.utils.serializer.item import *
 from mongoengine import Q
-from app.controllers.User.get_user_by_token import get_user_by_token
+from app.controllers.User.user import get_user_by_token
 from flask import request
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError

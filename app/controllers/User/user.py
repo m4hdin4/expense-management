@@ -3,7 +3,6 @@ from app.models.Category import Category
 from app.models.Item import Item
 from app.models.User import User
 from app.utils.JSONEncoder import JSONEncoder
-from app.controllers.User.get_user_by_token import get_user_by_token
 from app.utils.serializer.user import *
 from flask import request
 from datetime import timedelta
@@ -82,10 +81,10 @@ def login():
         return JSONEncoder().encode({"error": "you should login first"}), 401
 
 
-@app.route('/user', methods=['GET'])
+@app.route('/user_items', methods=['GET'])
 def get_list():
     """
-    @api {GET} /user get user list
+    @api {GET} /user_items get user list
     @apiName get_list
     @apiGroup user
 
@@ -173,7 +172,8 @@ def update_password():
     if user.password != str(hashlib.md5(old_password.encode()).hexdigest()):
         return JSONEncoder().encode({"error": "you should login first"}), 401
     try:
-        User.objects(username=user.username).update_one(set__password=str(hashlib.md5(new_password.encode()).hexdigest()))
+        User.objects(username=user.username).update_one(
+            set__password=str(hashlib.md5(new_password.encode()).hexdigest()))
         return JSONEncoder().encode({"username": user.username, "message": "password changed"}), 200
     except Exception as e:
         return JSONEncoder().encode({"error": str(e)}), 400
@@ -216,3 +216,12 @@ def delete_account():
         category.delete()
     user.delete()
     return JSONEncoder().encode({"message": "DELETED"}), 200
+
+
+def get_user_by_token(token):
+    try:
+        username = redisClient.get(token).decode("utf-8")
+        user = User.objects(username=username).first()
+        return user
+    except:
+        return None
