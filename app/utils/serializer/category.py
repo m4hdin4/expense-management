@@ -2,6 +2,8 @@ Get_Category_Schema = {
     "type": "object",
     "properties": {
         "category": {"type": "string"},
+        "page_size": {"type": "number"},
+        "page_num": {"type": "number"},
     },
     "required": [
                    "category",

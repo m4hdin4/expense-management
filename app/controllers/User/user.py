@@ -122,8 +122,15 @@ def get_list():
     user = get_user_by_token(request.headers['token'])
     if user is None:
         return JSONEncoder().encode({"error": "you should login first"}), 401
+    try:
+        validate(instance=request.args, schema=Get_items)
+    except ValidationError as e:
+        return JSONEncoder().encode({"error": e.schema}), 400
+    page_size = request.args['page_size'] or 20
+    page_num = request.args['page_num'] or 1
+    offset = (page_num - 1) * page_size
     output_list = []
-    query = Item.objects(user=user)
+    query = Item.objects(user=user).skip(offset).limit(page_size)
     for it in query:
         single_item = {"id": it.id,
                        "username": it.user.username,

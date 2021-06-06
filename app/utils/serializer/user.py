@@ -31,3 +31,11 @@ Check_Password_Schema = {
                    "password",
                 ]
 }
+
+Get_items = {
+    "type": "object",
+    "properties": {
+        "page_size": {"type": "number"},
+        "page_num": {"type": "number"},
+    },
+}

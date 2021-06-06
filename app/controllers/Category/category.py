@@ -93,9 +93,12 @@ def get_category():
     except ValidationError as e:
         return JSONEncoder().encode({"error": e.schema}), 400
     category = request.args['category']
+    page_size = request.args['page_size'] or 20
+    page_num = request.args['page_num'] or 1
+    offset = (page_num - 1) * page_size
     category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
     output_list = []
-    query = Item.objects(Q(category=category_item))
+    query = Item.objects(Q(category=category_item)).skip(offset).limit(page_size)
     for it in query:
         single_item = {"id": it.id,
                        "username": it.user.username,
