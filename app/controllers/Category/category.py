@@ -4,10 +4,9 @@ from app.models.Category import Category
 from app.utils.serializer.category import *
 from mongoengine import Q
 from app.controllers.User.user import get_user_by_token
-from flask import request
+from flask import request, abort
 from app.utils.JSONEncoder import JSONEncoder
 from jsonschema import validate
-from jsonschema.exceptions import ValidationError
 
 
 @app.route('/category', methods=['POST'])
@@ -31,18 +30,12 @@ def insert_category():
             }
     """
     if 'token' not in request.headers:
-        return JSONEncoder().encode({"error": "authorization failed"}), 400
+        abort(401)
     user = get_user_by_token(request.headers['token'])
-    if user is None:
-        return JSONEncoder().encode({"error": "you should login first"}), 401
-    try:
-        validate(instance=request.json, schema=Insert_Category_Schema)
-    except ValidationError as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
-    else:
-        category = request.json['category']
-        Category(category_name=category, user=user).save()
-        return JSONEncoder().encode({"category": category, "message": "category added"}), 201
+    validate(instance=request.json, schema=Insert_Category_Schema)
+    category = request.json['category']
+    Category(category_name=category, user=user).save()
+    return JSONEncoder().encode({"category": category, "message": "category added"}), 201
 
 
 @app.route('/category', methods=['GET'])
@@ -55,6 +48,8 @@ def get_category():
     @apiHeader {String} token - a unique session id that is valid for each login for 3 hours
 
     @apiParam {String} category
+    @apiParam {String} page_size string of numbers to show how much item should be per page
+    @apiParam {String} page_num string of numbers to show which page you want
 
     @apiSuccess {Object} returns query objects if exists
 
@@ -84,14 +79,9 @@ def get_category():
         }
     """
     if 'token' not in request.headers:
-        return JSONEncoder().encode({"error": "authorization failed"}), 400
+        abort(401)
     user = get_user_by_token(request.headers['token'])
-    if user is None:
-        return JSONEncoder().encode({"error": "you should login first"}), 401
-    try:
-        validate(instance=request.args, schema=Get_Category_Schema)
-    except ValidationError as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
+    validate(instance=request.args, schema=Get_Category_Schema)
     category = request.args['category']
     page_size = int(request.args['page_size']) or 20
     page_num = int(request.args['page_num']) or 1
@@ -133,14 +123,9 @@ def update_category():
             }
     """
     if 'token' not in request.headers:
-        return JSONEncoder().encode({"error": "authorization failed"}), 400
+        abort(401)
     user = get_user_by_token(request.headers['token'])
-    if user is None:
-        return JSONEncoder().encode({"error": "you should login first"}), 401
-    try:
-        validate(instance=request.json, schema=Update_Category_Schema)
-    except ValidationError as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
+    validate(instance=request.json, schema=Update_Category_Schema)
     old_category = request.json['old_category']
     new_category = request.json['new_category']
 
@@ -148,7 +133,7 @@ def update_category():
     if flag == 1:
         return JSONEncoder().encode({"category_name": new_category}), 200
     else:
-        return JSONEncoder().encode({"error": "not found"}), 404
+        return JSONEncoder().encode({"error": "category not found"}), 404
 
 
 @app.route('/category', methods=['DELETE'])
@@ -171,19 +156,13 @@ def delete_category():
             }
     """
     if 'token' not in request.headers:
-        return JSONEncoder().encode({"error": "authorization failed"}), 400
+        abort(401)
     user = get_user_by_token(request.headers['token'])
-    if user is None:
-        return JSONEncoder().encode({"error": "you should login first"}), 401
-    try:
-        validate(instance=request.args, schema=Delete_Category_Schema)
-    except ValidationError as e:
-        return JSONEncoder().encode({"error": e.schema}), 400
+    validate(instance=request.args, schema=Delete_Category_Schema)
     category = request.args['category']
-    try:
-        category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
-        Item.objects(category=category_item).delete()
-        category_item.delete()
-        return JSONEncoder().encode({"message": "DELETED"}), 200
-    except:
-        return JSONEncoder().encode({"error": "not found"}), 404
+    category_item = Category.objects(Q(category_name=category) & Q(user=user)).first()
+    if category_item is None:
+        return JSONEncoder().encode({"error": "category not found"}), 404
+    Item.objects(category=category_item).delete()
+    category_item.delete()
+    return JSONEncoder().encode({"message": "DELETED"}), 200

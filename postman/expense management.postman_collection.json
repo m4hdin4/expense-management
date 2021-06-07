@@ -320,14 +320,30 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/user_items",
+									"raw": "{{url}}/user_items?page_size=2g&page_num=4f",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"user_items"
+									],
+									"query": [
+										{
+											"key": "page_size",
+											"value": "2g"
+										},
+										{
+											"key": "page_num",
+											"value": "4f"
+										}
 									]
 								}
 							},
@@ -893,9 +909,15 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/category?category=test_category1",
+									"raw": "{{url}}/category",
 									"host": [
 										"{{url}}"
 									],
@@ -905,7 +927,8 @@
 									"query": [
 										{
 											"key": "category",
-											"value": "test_category1"
+											"value": "test_category1",
+											"disabled": true
 										}
 									]
 								}
@@ -1203,9 +1226,15 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/category?category=test2",
+									"raw": "{{url}}/category",
 									"host": [
 										"{{url}}"
 									],
@@ -1215,7 +1244,8 @@
 									"query": [
 										{
 											"key": "category",
-											"value": "test2"
+											"value": "test2",
+											"disabled": true
 										}
 									]
 								}
@@ -1425,7 +1455,13 @@
 							],
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"product_name\": \"test1\",\r\n    \"product_price\": 10000\r\n}",
@@ -1568,9 +1604,15 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/item?spend_id={{spend_id}}",
+									"raw": "{{url}}/item",
 									"host": [
 										"{{url}}"
 									],
@@ -1580,7 +1622,8 @@
 									"query": [
 										{
 											"key": "spend_id",
-											"value": "{{spend_id}}"
+											"value": "{{spend_id}}",
+											"disabled": true
 										}
 									]
 								}
@@ -1696,10 +1739,16 @@
 							],
 							"request": {
 								"method": "PUT",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"spend_id\": \"{{spend_id}}\",\r\n    \"product_name\": \"test2\"\r\n}",
+									"raw": "{\r\n    \"product_name\": \"test2\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1872,9 +1921,15 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/item?spend_id={{spend_id}}",
+									"raw": "{{url}}/item",
 									"host": [
 										"{{url}}"
 									],
@@ -1884,7 +1939,8 @@
 									"query": [
 										{
 											"key": "spend_id",
-											"value": "{{spend_id}}"
+											"value": "{{spend_id}}",
+											"disabled": true
 										}
 									]
 								}

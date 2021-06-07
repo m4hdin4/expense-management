@@ -83,6 +83,20 @@
             "optional": false,
             "field": "category",
             "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page_size",
+            "description": "<p>string of numbers to show how much item should be per page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page_num",
+            "description": "<p>string of numbers to show which page you want</p>"
           }
         ]
       }
@@ -540,6 +554,26 @@
             "optional": false,
             "field": "token",
             "description": "<ul> <li>a unique session id that is valid for each login for 3 hours</li> </ul>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page_size",
+            "description": "<p>string of numbers to show how much item should be per page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page_num",
+            "description": "<p>string of numbers to show which page you want</p>"
           }
         ]
       }
