@@ -2,5 +2,5 @@
   "name": "expense-management",
   "description": "back-end project to manage your expense",
   "title": "expense-management server",
-  "url" : "http://127.0.0.1:5000/"
+  "url" : "http://127.0.0.1:5000"
 }
