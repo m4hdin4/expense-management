@@ -35,7 +35,7 @@ Check_Password_Schema = {
 Get_items = {
     "type": "object",
     "properties": {
-        "page_size": {"type": "number"},
-        "page_num": {"type": "number"},
+        "page_size": {"type": "string", "pattern": "^[0-9]*$"},
+        "page_num": {"type": "string", "pattern": "^[0-9]*$"},
     },
 }
