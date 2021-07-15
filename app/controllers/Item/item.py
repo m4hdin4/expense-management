@@ -1,15 +1,16 @@
-from app import app
 from app.models.Category import Category
 from app.models.Item import Item
 from app.utils.JSONEncoder import JSONEncoder
 from app.utils.serializer.item import *
 from mongoengine import Q
 from app.controllers.User.user import get_user_by_token
-from flask import request, abort
+from flask import request, abort, Blueprint
 from jsonschema import validate
 
+app_item = Blueprint("item", __name__, url_prefix="/item")
 
-@app.route('/item', methods=['GET'])
+
+@app_item.route('', methods=['GET'])
 def get_one():
     """
     @api {GET} /item get item
@@ -57,7 +58,7 @@ def get_one():
     return JSONEncoder().encode(output), 200
 
 
-@app.route('/item', methods=['POST'])
+@app_item.route('', methods=['POST'])
 def insert():
     """
     @api {POST} /item insert item
@@ -94,7 +95,7 @@ def insert():
     return JSONEncoder().encode({"spend_id": str(inserted.id), "message": "item added"}), 201
 
 
-@app.route('/item', methods=['PUT'])
+@app_item.route('', methods=['PUT'])
 def update():
     """
     @api {PUT} /item update item
@@ -136,7 +137,7 @@ def update():
     return JSONEncoder().encode({"spend_id": spend_id, "error": "item updated"}), 200
 
 
-@app.route('/item', methods=['DELETE'])
+@app_item.route('', methods=['DELETE'])
 def delete():
     """
     @api {DELETE} /item delete item

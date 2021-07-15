@@ -24,6 +24,15 @@
 										],
 										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
 							"request": {
@@ -39,11 +48,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/signup",
+									"raw": "{{url}}/user/signup",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"signup"
 									]
 								}
@@ -78,11 +88,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/signup",
+									"raw": "{{url}}/user/signup",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"signup"
 									]
 								}
@@ -117,11 +128,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/signup",
+									"raw": "{{url}}/user/signup",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"signup"
 									]
 								}
@@ -163,11 +175,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/login",
+									"raw": "{{url}}/user/login",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"login"
 									]
 								}
@@ -202,11 +215,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/login",
+									"raw": "{{url}}/user/login",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"login"
 									]
 								}
@@ -241,11 +255,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/login",
+									"raw": "{{url}}/user/login",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"login"
 									]
 								}
@@ -282,11 +297,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/user_items?page_size=5&page_num=1",
+									"raw": "{{url}}/user/user_items?page_size=5&page_num=1",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"user_items"
 									],
 									"query": [
@@ -328,11 +344,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/user_items?page_size=2g&page_num=4f",
+									"raw": "{{url}}/user/user_items?page_size=2g&page_num=4f",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"user_items"
 									],
 									"query": [
@@ -374,11 +391,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/user_items",
+									"raw": "{{url}}/user/user_items",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
+										"user",
 										"user_items"
 									]
 								}

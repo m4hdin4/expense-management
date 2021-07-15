@@ -1,20 +1,23 @@
-from app import app, redisClient
+from app import redisClient
 from app.models.Category import Category
 from app.models.Item import Item
 from app.models.User import User
 from app.utils.JSONEncoder import JSONEncoder
 from app.utils.serializer.user import *
-from flask import request, abort
+from flask import request, abort, Blueprint
 from datetime import timedelta
 import hashlib
 import uuid
 from jsonschema import validate
 
 
-@app.route('/signup', methods=['POST'])
+app_user = Blueprint("user", __name__, url_prefix="/user")
+
+
+@app_user.route('/signup', methods=['POST'])
 def signup():
     """
-    @api {POST} /signup signup
+    @api {POST} /user/signup signup
     @apiName signup
     @apiGroup user
 
@@ -39,10 +42,10 @@ def signup():
     return JSONEncoder().encode({"username": username, "message": "user added"}), 201
 
 
-@app.route('/login', methods=['POST'])
+@app_user.route('/login', methods=['POST'])
 def login():
     """
-    @api {UNLOCK} /login login
+    @api {UNLOCK} /user/login login
     @apiName login
     @apiGroup user
 
@@ -69,10 +72,10 @@ def login():
     return JSONEncoder().encode({"token": token, "message": "login successful"}), 200
 
 
-@app.route('/user_items', methods=['GET'])
+@app_user.route('/user_items', methods=['GET'])
 def get_list():
     """
-    @api {GET} /user_items get user list
+    @api {GET} /user/user_items get user list
     @apiName get_list
     @apiGroup user
 
@@ -130,7 +133,7 @@ def get_list():
     return JSONEncoder().encode(output), 200
 
 
-@app.route('/user', methods=['PUT'])
+@app_user.route('', methods=['PUT'])
 def update_password():
     """
     @api {PUT} /user update user password
@@ -164,7 +167,7 @@ def update_password():
     return JSONEncoder().encode({"username": user.username, "message": "password changed"}), 200
 
 
-@app.route('/user', methods=['DELETE'])
+@app_user.route('', methods=['DELETE'])
 def delete_account():
     """
     @api {DELETE} /user delete account

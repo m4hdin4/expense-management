@@ -541,7 +541,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "/user_items",
+    "url": "/user/user_items",
     "title": "get user list",
     "name": "get_list",
     "group": "user",
@@ -604,7 +604,7 @@ define({ "api": [
   },
   {
     "type": "UNLOCK",
-    "url": "/login",
+    "url": "/user/login",
     "title": "login",
     "name": "login",
     "group": "user",
@@ -650,7 +650,7 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "/signup",
+    "url": "/user/signup",
     "title": "signup",
     "name": "signup",
     "group": "user",

@@ -1,15 +1,16 @@
-from app import app
 from app.models.Item import Item
 from app.models.Category import Category
 from app.utils.serializer.category import *
 from mongoengine import Q
 from app.controllers.User.user import get_user_by_token
-from flask import request, abort
+from flask import request, abort, Blueprint
 from app.utils.JSONEncoder import JSONEncoder
 from jsonschema import validate
 
+app_category = Blueprint("category", __name__, url_prefix="/category")
 
-@app.route('/category', methods=['POST'])
+
+@app_category.route('', methods=['POST'])
 def insert_category():
     """
     @api {POST} /category insert category
@@ -38,7 +39,7 @@ def insert_category():
     return JSONEncoder().encode({"category": category, "message": "category added"}), 201
 
 
-@app.route('/category', methods=['GET'])
+@app_category.route('', methods=['GET'])
 def get_category():
     """
     @api {GET} /user get category
@@ -102,7 +103,7 @@ def get_category():
     return JSONEncoder().encode(output), 200
 
 
-@app.route('/category', methods=['PUT'])
+@app_category.route('', methods=['PUT'])
 def update_category():
     """
     @api {PUT} /category update category
@@ -136,7 +137,7 @@ def update_category():
         return JSONEncoder().encode({"error": "category not found"}), 404
 
 
-@app.route('/category', methods=['DELETE'])
+@app_category.route('', methods=['DELETE'])
 def delete_category():
     """
     @api {DELETE} /category delete category
